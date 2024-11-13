@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,14 +18,15 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User{
+public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
-    String username;
-    @Size(min = 8, message = "Password must be at least 8 characters")
-    String password;
-    String email;
-    String role;
+    String content;
 
+    @ManyToOne
+    User sender;
+
+    @ManyToOne
+    User receiver;
 }

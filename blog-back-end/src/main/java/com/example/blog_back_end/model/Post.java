@@ -1,6 +1,7 @@
 package com.example.blog_back_end.model;
 
 import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,11 +23,13 @@ import lombok.experimental.FieldDefaults;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    Long id;
+    String id;
     String title;
     String content;
+    String summary;
+    String author;
     LocalDateTime createdAt;
 
     @ManyToOne
-    User author;
+    User user;
 }
