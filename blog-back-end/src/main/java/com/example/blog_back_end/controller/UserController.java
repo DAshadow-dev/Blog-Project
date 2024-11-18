@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.blog_back_end.dto.request.ApiResponse;
 import com.example.blog_back_end.dto.request.UserCreationRequest;
 import com.example.blog_back_end.dto.request.UserUpdateRequest;
+import com.example.blog_back_end.dto.response.UserResponse;
 import com.example.blog_back_end.model.User;
+import com.example.blog_back_end.repository.UserRepository;
 import com.example.blog_back_end.service.UserService;
 
 import jakarta.validation.Valid;
@@ -29,23 +32,29 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getAllUsers(){
+    public List<UserResponse> getAllUsers(){
         return userService.getAllUsers();
     }
 
     @GetMapping("/{userId}")
-    public User getUser(@PathVariable String userId) {
-        return userService.getUser(userId);
+    public ApiResponse<UserResponse> getUser(@PathVariable String userId) {
+        ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.getUser(userId));
+        return apiResponse;
     }
     
     @PostMapping
-    public User creatUser(@RequestBody @Valid UserCreationRequest userCreationRequest){
-        return userService.createUser(userCreationRequest);
+    public ApiResponse<UserResponse> creatUser(@RequestBody @Valid UserCreationRequest userCreationRequest){
+        ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.createUser(userCreationRequest));
+        return apiResponse;
     }
 
     @PutMapping("/{userId}")
-    public User updatUser(@PathVariable String userId, @RequestBody @Valid UserUpdateRequest userUpdateRequest) {
-        return userService.updateUser(userId, userUpdateRequest);
+    public ApiResponse<UserResponse> updatUser(@PathVariable String userId, @RequestBody @Valid UserUpdateRequest userUpdateRequest) {
+        ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.updateUser(userId, userUpdateRequest));
+        return apiResponse;
     }
      @DeleteMapping("/{userId}")
     public String deleteUser(@PathVariable String userId){
