@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.blog_back_end.dto.request.ApiResponse;
 import com.example.blog_back_end.dto.request.UserCreationRequest;
 import com.example.blog_back_end.dto.request.UserUpdateRequest;
+import com.example.blog_back_end.dto.response.ApiResponse;
 import com.example.blog_back_end.dto.response.UserResponse;
 import com.example.blog_back_end.model.User;
 import com.example.blog_back_end.repository.UserRepository;
@@ -22,8 +22,6 @@ import com.example.blog_back_end.service.UserService;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PutMapping;
-
-
 
 @RestController
 @RequestMapping("/users")

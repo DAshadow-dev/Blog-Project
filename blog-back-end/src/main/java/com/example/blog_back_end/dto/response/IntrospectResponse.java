@@ -1,6 +1,4 @@
-package com.example.blog_back_end.dto.request;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
+package com.example.blog_back_end.dto.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,9 +12,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ApiResponse<T> {
-    int code = 1000;
-    String message;
-    T result;
+public class IntrospectResponse {
+    boolean valid;
 }

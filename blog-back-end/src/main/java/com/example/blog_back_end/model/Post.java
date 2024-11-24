@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Builder.Default;
 import lombok.experimental.FieldDefaults;
 
 @Entity
@@ -28,7 +29,8 @@ public class Post {
     String content;
     String summary;
     String author;
-    LocalDateTime createdAt;
+    @Default
+    LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne
     User user;

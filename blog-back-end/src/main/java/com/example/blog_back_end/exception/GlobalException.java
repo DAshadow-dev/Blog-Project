@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.example.blog_back_end.Enum.ErrorCode;
-import com.example.blog_back_end.dto.request.ApiResponse;
+import com.example.blog_back_end.dto.response.ApiResponse;
 
 @ControllerAdvice
 public class GlobalException {
