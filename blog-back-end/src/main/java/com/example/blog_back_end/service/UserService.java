@@ -11,7 +11,7 @@ import com.example.blog_back_end.Enum.ErrorCode;
 import com.example.blog_back_end.dto.request.UserCreationRequest;
 import com.example.blog_back_end.dto.request.UserUpdateRequest;
 import com.example.blog_back_end.dto.response.UserResponse;
-import com.example.blog_back_end.exception.UserException;
+import com.example.blog_back_end.exception.AppException;
 import com.example.blog_back_end.mapper.UserMapper;
 import com.example.blog_back_end.model.User;
 import com.example.blog_back_end.repository.UserRepository;
@@ -36,11 +36,11 @@ public class UserService {
     }
     public UserResponse getUser(String userId){
 
-        return userMapper.toUserResponse(userRepository.findById(userId).orElseThrow(() -> new UserException(ErrorCode.USER_NOT_EXISTED)));
+        return userMapper.toUserResponse(userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED)));
     }
     public UserResponse createUser(UserCreationRequest userCreationRequest){
         if(userRepository.existsByUsername(userCreationRequest.getUsername()))
-            throw new UserException(ErrorCode.USER_EXISTED);
+            throw new AppException(ErrorCode.USER_EXISTED);
 
         User user = userMapper.toUser(userCreationRequest);
 
@@ -51,12 +51,13 @@ public class UserService {
     }
 
     public UserResponse updateUser(String userId, UserUpdateRequest userUpdateRequest){
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserException(ErrorCode.USER_NOT_EXISTED));
+        User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
         userMapper.updateUser(user, userUpdateRequest);
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
-    public void deleteUser(String userId){
+    public String deleteUser(String userId){
         userRepository.deleteById(userId);
+        return "User "+getUser(userId).getUsername()+" has been deleted";
     }
 }

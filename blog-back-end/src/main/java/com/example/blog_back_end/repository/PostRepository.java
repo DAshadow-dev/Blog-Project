@@ -7,5 +7,5 @@ import com.example.blog_back_end.model.Post;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post,String> {
-
+    
 }

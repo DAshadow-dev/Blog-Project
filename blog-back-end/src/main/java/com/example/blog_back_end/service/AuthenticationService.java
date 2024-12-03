@@ -15,7 +15,7 @@ import com.example.blog_back_end.dto.request.AuthenticationRequest;
 import com.example.blog_back_end.dto.request.IntrospectRequest;
 import com.example.blog_back_end.dto.response.AuthenticationResponse;
 import com.example.blog_back_end.dto.response.IntrospectResponse;
-import com.example.blog_back_end.exception.UserException;
+import com.example.blog_back_end.exception.AppException;
 import com.example.blog_back_end.repository.UserRepository;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
@@ -64,11 +64,11 @@ public class AuthenticationService {
     public AuthenticationResponse authenticate(AuthenticationRequest request){
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         var user = userRepository.findByUsername(request.getUsername())
-            .orElseThrow(() -> new UserException(ErrorCode.USER_NOT_EXISTED));
+            .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
         boolean authenticated = passwordEncoder.matches(request.getPassword(),user.getPassword());
 
-        if(!authenticated) throw new UserException(ErrorCode.UNAUTHENTICATED);
+        if(!authenticated) throw new AppException(ErrorCode.UNAUTHENTICATED);
         var token = generateToken(request.getUsername());
 
         return AuthenticationResponse.builder()

@@ -10,6 +10,7 @@ import com.example.blog_back_end.dto.response.ApiResponse;
 
 @ControllerAdvice
 public class GlobalException {
+    @SuppressWarnings("rawtypes")
     @ExceptionHandler(value = Exception.class)
     ResponseEntity<ApiResponse> handleRuntimeException(RuntimeException e){
         ApiResponse apiResponse = new ApiResponse();
@@ -19,8 +20,9 @@ public class GlobalException {
         return ResponseEntity.badRequest().body(apiResponse);
     }
 
-    @ExceptionHandler(value = UserException.class)
-    ResponseEntity<ApiResponse> handleUserException(UserException e){
+    @SuppressWarnings("rawtypes")
+    @ExceptionHandler(value = AppException.class)
+    ResponseEntity<ApiResponse> handleAppException(AppException e){
         ErrorCode errorCode = e.getErrorCode();
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setCode(errorCode.getCode());
@@ -29,6 +31,7 @@ public class GlobalException {
         return ResponseEntity.badRequest().body(apiResponse);
     }
 
+    @SuppressWarnings("null")
     @ExceptionHandler(value = MethodArgumentNotValidException.class )
     ResponseEntity<String> handleValidException(MethodArgumentNotValidException e){
         return ResponseEntity.badRequest().body(e.getFieldError().getDefaultMessage());

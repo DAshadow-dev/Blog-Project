@@ -15,8 +15,6 @@ import com.example.blog_back_end.dto.request.UserCreationRequest;
 import com.example.blog_back_end.dto.request.UserUpdateRequest;
 import com.example.blog_back_end.dto.response.ApiResponse;
 import com.example.blog_back_end.dto.response.UserResponse;
-import com.example.blog_back_end.model.User;
-import com.example.blog_back_end.repository.UserRepository;
 import com.example.blog_back_end.service.UserService;
 
 import jakarta.validation.Valid;
@@ -55,8 +53,9 @@ public class UserController {
         return apiResponse;
     }
      @DeleteMapping("/{userId}")
-    public String deleteUser(@PathVariable String userId){
-        userService.deleteUser(userId);
-        return "User deleted successfully";
+    public ApiResponse<?> deleteUser(@PathVariable String userId){
+        ApiResponse<?> apiResponse = new ApiResponse<>();
+        apiResponse.setMessage(userService.deleteUser(userId));
+        return apiResponse;
     }
 }

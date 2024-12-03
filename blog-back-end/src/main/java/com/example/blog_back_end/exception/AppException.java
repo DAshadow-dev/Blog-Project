@@ -2,9 +2,9 @@ package com.example.blog_back_end.exception;
 
 import com.example.blog_back_end.Enum.ErrorCode;
 
-public class UserException extends RuntimeException {
+public class AppException extends RuntimeException {
 
-    public UserException(ErrorCode errorCode) {
+    public AppException(ErrorCode errorCode) {
         super(errorCode.getMessage());
         this.errorCode = errorCode;
     }
