@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BlogBackEndApplication<blog-back-end>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.blog_back_end.BlogBackEndApplication",
+            "projectName": "blog-back-end",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
